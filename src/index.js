@@ -1,19 +1,23 @@
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import ReactDOM from 'react-dom';
 
 function JournalEntryForm() {
+  const [entries, setEntries] = useState([]);
   const [entry, setEntry] = useState("");
-  const journalItems = [
-    {id:1, value:'Entry1'},
-    {id:2, value:'Entry2'}
-  ];
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = useCallback((event) => {
+    event.preventDefault(); 
     console.log(entry);
-    journalItems.push(entry);
-  }
+    setEntries((t) => [...t, entry]);
+  }, [entries]);
+   
+  
+
+
+ // const addEntry = useCallback(() => {
+  //  setEntries((t) => [...t, entry]);
+  //}, [entries]);
 
   return (
     <>
@@ -27,19 +31,27 @@ function JournalEntryForm() {
       </label>
       <input type="submit" />
     </form>
-    <ul>
-      {journalItems.map((journalItem) => <JournalEntry key={journalItem.id} value={journalItem.value} />)}
-    </ul>
+    <hr />
+    <Entries entries={entries} addEntry={handleSubmit} />
     </>
 
   )
 }
 
-function JournalEntry(props){
-  return(
-      <li>{props.value}</li>
+const Entries = ({ entries, addEntry }) => {
+  console.log("child render");
+  return (
+    <>
+      <h2>Journal Entries</h2>
+      {entries.map((entry, index) => {
+        return <p key={index}>{entry}</p>;
+      })}
+      <button onClick={addEntry}>Add Entry</button>
+    </>
   );
-}
+};
+
+
 
 
 ReactDOM.render(<JournalEntryForm />, document.getElementById('root'));
