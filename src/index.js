@@ -2,7 +2,7 @@
 import { useState, useCallback } from "react";
 import ReactDOM from 'react-dom';
 import Entries from './JournalEntries.js'
-
+import './App.css'
 
 function App() {
 
@@ -13,6 +13,7 @@ function App() {
     event.preventDefault();
     console.log(entry);
     setEntries((t) => [...t, entry]);
+    setEntry("");
   }
 
   return (
