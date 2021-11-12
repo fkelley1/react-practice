@@ -1,0 +1,11 @@
+body {
+  background-color: #202124;
+  color: white;
+  padding: 40px;
+  font-family: Sans-Serif, 'Times New Roman', Times, serif;
+  
+}
+
+input{
+	margin: 10px;
+}
