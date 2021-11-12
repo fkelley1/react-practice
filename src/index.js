@@ -2,9 +2,9 @@
 import { useState, useCallback } from "react";
 import ReactDOM from 'react-dom';
 import Entries from './JournalEntries.js'
-function App() {
+import './App.css'
 
-  const staticEntry = ["First day I learned components", "Second Day I learned State", "Third Item was controlled components"];
+function App() {
 
   const [entry, setEntry] = useState("");
   const [entries, setEntries] = useState([]);
@@ -12,12 +12,9 @@ function App() {
    const handleSubmit = (event) => {
     event.preventDefault();
     console.log(entry);
-    console.log(staticEntry);
-    setEntries(staticEntry);
-
+    setEntries((t) => [...t, entry]);
+    setEntry("");
   }
-
-
 
   return (
     <>
